@@ -12,10 +12,11 @@ let THREECAMERA = null;
 let faceMesh = null;
 let visible = true;
 let gltfObj = null;
+let threeStuffs = null;
 
 // build the 3D. called once when Jeeliz Face Filter is OK
 function init_threeScene(spec){
-  let threeStuffs = JeelizThreeHelper.init(spec, null);
+  threeStuffs = JeelizThreeHelper.init(spec, null);
 
   const loadingManager = new THREE.LoadingManager();
   // CREATE THE MASK
@@ -102,8 +103,8 @@ function init_threeScene(spec){
 
     gltfObj = gltf.scene;
 
-    threeStuffs.faceObject.add(gltf.scene);
-
+    threeStuffs.faceObject.add(gltfObj);
+    gltfObj.visible = false;
     threeStuffs.faceObject.add(light);
   } ); //end gltfLoader.load callback
   //CREATE THE CAMERA
@@ -170,6 +171,8 @@ const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
   return blob;
 }
 
+
+let faceIds = [];
 function start(){
   
   JEELIZFACEFILTER.init({ 
@@ -191,7 +194,8 @@ function start(){
 
       console.log('INFO: JEELIZFACEFILTER IS READY');
       init_threeScene(spec);
-      gltfObj.visible = false;
+      // let kepka = threeStuffs.getObjectById('1');
+      // console.log(kepka);
     }, //end callbackReady()
 
     // called at each render iteration (drawing loop):
@@ -199,7 +203,7 @@ function start(){
       JeelizThreeHelper.render(detectState, THREECAMERA);
       if(detectState.detected>0.9){
         if(k==0){
-          html2canvas(document.querySelector("#jeeFaceFilterCanvas")).then(canvas => {
+          html2canvas(document.querySelector("#jeeFaceFilterCanvas"),{scale:0.2}).then(canvas => {
             // document.body.appendChild(canvas)
             // console.log(canvas.toDataURL());
             const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
@@ -228,6 +232,11 @@ function start(){
             const blob = b64toBlob(screendata, contentType);
             const blobUrl = URL.createObjectURL(blob);
             
+            // const img = document.createElement('img');
+            // img.src = blobUrl;
+            // // document.body.appendChild(img);
+            // saveAs(canvas.toDataURL(), 'file-name.png');
+
             axios({
               method: 'post',
               url: 'https://leninfr.cognitiveservices.azure.com/face/v1.0/detect',
@@ -241,9 +250,14 @@ function start(){
               },
               data: blob
             }).then(function (response) {
+
+              
               console.log(response.data[0]['faceId']);
               faceIdLenin = response.data[0]['faceId'];
 
+              if(faceIds.indexOf(faceIdLenin)==-1){
+                faceIds.push(faceIdLenin);
+                
               let lenin_group_id = "9b0cae9d-16e4-4ef7-b76c-f60682e13dd6";
 
               axios({
@@ -259,29 +273,25 @@ function start(){
                 console.log(response);
                 if (response.data[0]["candidates"].length ==0){
                     console.log("Lenin Not Detected");
-                    gltfObj.visible = true;
               }
                 else{                    
                   console.log(response.data[0]['candidates'][0]["confidence"]);
                   let conf = response.data[0]['candidates'][0]["confidence"];
                   if(conf>0.5){
-
+                    gltfObj.visible = true;
                   }
                 };
               })
               .catch(function (error) {
-                console.log(error.response);
+                console.log(error.response.data);
               });
-              
+              }
+
+
             })
             .catch(function (error) {
-              console.log(error);
+              console.log(error.response.data);
             });
-
-            // const img = document.createElement('img');
-            // img.src = blobUrl;
-            // document.body.appendChild(img);
-            // saveAs(canvas.toDataURL(), 'file-name.png');
           });
           k+=1;
         }
