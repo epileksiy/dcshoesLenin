@@ -1,4 +1,4 @@
-"use strict";
+// heroku git:remote -a dcshoeslenin"use strict";
 
 // SETTINGS of this demo:
 const SETTINGS = {
@@ -81,7 +81,7 @@ function init_threeScene(spec){
   // from https://threejs.org/examples/#webgl_loader_gltf
   const gltfLoader = new THREE.GLTFLoader();
   gltfLoader.load( SETTINGS.gltfModelURL, function ( gltf ) {
-    
+
     // center and scale the object:
     const bbox = new THREE.Box3().expandByObject(gltf.scene);
 
@@ -96,7 +96,7 @@ function init_threeScene(spec){
 
     const light = new THREE.AmbientLight( 0xCCCCCC ); // soft white light
 
-    
+
     // dispatch the model:
     faceMesh.position.add(new THREE.Vector3(0,0,-0.1));
     threeStuffs.faceObject.add(faceMesh);
@@ -174,8 +174,8 @@ const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
 
 let faceIds = [];
 function start(){
-  
-  JEELIZFACEFILTER.init({ 
+
+  JEELIZFACEFILTER.init({
     videoSettings:{ // increase the default video resolution since we are in full screen
       'idealWidth': 1280,  // ideal video width in pixels
       'idealHeight': 800,  // ideal video height in pixels
@@ -201,7 +201,7 @@ function start(){
     // called at each render iteration (drawing loop):
     callbackTrack: function(detectState){
       JeelizThreeHelper.render(detectState, THREECAMERA);
-      if(detectState.detected>0.9){
+      if(detectState.detected>0.7){
         if(k==0){
           html2canvas(document.querySelector("#jeeFaceFilterCanvas"),{scale:0.2}).then(canvas => {
             // document.body.appendChild(canvas)
@@ -209,29 +209,29 @@ function start(){
             const b64toBlob = (b64Data, contentType='', sliceSize=512) => {
               const byteCharacters = atob(b64Data);
               const byteArrays = [];
-            
+
               for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
                 const slice = byteCharacters.slice(offset, offset + sliceSize);
-            
+
                 const byteNumbers = new Array(slice.length);
                 for (let i = 0; i < slice.length; i++) {
                   byteNumbers[i] = slice.charCodeAt(i);
                 }
-            
+
                 const byteArray = new Uint8Array(byteNumbers);
                 byteArrays.push(byteArray);
               }
-            
+
               const blob = new Blob(byteArrays, {type: contentType});
               return blob;
             }
-            
+
             const contentType = 'image/png';
             const screendata = canvas.toDataURL().slice(22);
             // const screendata = 'iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==';
             const blob = b64toBlob(screendata, contentType);
             const blobUrl = URL.createObjectURL(blob);
-            
+
             // const img = document.createElement('img');
             // img.src = blobUrl;
             // // document.body.appendChild(img);
@@ -251,20 +251,20 @@ function start(){
               data: blob
             }).then(function (response) {
 
-              
+
               console.log(response.data[0]['faceId']);
               faceIdLenin = response.data[0]['faceId'];
 
               if(faceIds.indexOf(faceIdLenin)==-1){
                 faceIds.push(faceIdLenin);
-                
+
               let lenin_group_id = "9b0cae9d-16e4-4ef7-b76c-f60682e13dd6";
 
               axios({
                 method: 'post',
                 url: 'https://leninfr.cognitiveservices.azure.com/face/v1.0/identify',
                 headers: {'Ocp-Apim-Subscription-Key': KEY},
-                data:{'PersonGroupId': lenin_group_id, 
+                data:{'PersonGroupId': lenin_group_id,
                     'faceIds': [faceIdLenin],
                     'maxNumOfCandidatesReturned': 1,
                     'confidenceThreshold': 0.5
@@ -274,11 +274,13 @@ function start(){
                 if (response.data[0]["candidates"].length ==0){
                     console.log("Lenin Not Detected");
               }
-                else{                    
+                else{
                   console.log(response.data[0]['candidates'][0]["confidence"]);
                   let conf = response.data[0]['candidates'][0]["confidence"];
                   if(conf>0.5){
                     gltfObj.visible = true;
+                    document.getElementById('plane3').style.display = 'none';
+                    document.getElementById('enddiv').style.display='flex';
                   }
                 };
               })
@@ -295,6 +297,10 @@ function start(){
           });
           k+=1;
         }
+      }
+      if(detectState.detected<0.5){
+        k=0;
+        gltfObj.visible = false;
       }
     }
   }); //end JEELIZFACEFILTER.init call

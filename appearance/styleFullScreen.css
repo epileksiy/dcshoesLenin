@@ -1,6 +1,7 @@
- a {color: #eee; text-decoration: none}
+a {color: #eee; text-decoration: none}
 a:hover {color: blue;}
-body {overflow: hidden; overflow-y: hidden;
+body {
+    overflow: hidden; overflow-y: hidden;
     margin: 0px;
 }
 /* .asd{
@@ -12,9 +13,286 @@ body {overflow: hidden; overflow-y: hidden;
 } */
 #jeeFaceFilterCanvas {
     z-index: 10;
-    position: absolute; 
+    position: absolute;
     width: 100%; height: 100%;
     top: 0px; left: 0px;
     transform: scale(1.4);
     transform-origin: center center 0px;
-} 
+}
+
+.starttext1div{
+    display: flex;
+    justify-content: center;
+}
+
+.starttext1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    bottom: 15%;
+    text-align: center;
+    z-index: 1;
+}
+
+.starttext1 a {
+    font-family: "HelveticaNeue";
+    font-size: 60px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+@font-face {
+    font-family: "HelveticaNeue";
+    src: url("../design/fonts/HelveticaNeueCyr-Bold.ttf") format("truetype");
+    font-style: normal;
+    font-weight: normal;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    right:0;
+    top:0;
+    background: url("../design/DClogo.png") no-repeat;
+    background-size: cover;
+    margin: 50px;
+}
+
+.instr{
+    z-index: 200;
+    position: absolute;
+    width: 120%; height: 121%;
+}
+
+.starttext2div{
+    display: flex;
+    justify-content: center;
+}
+
+.starttext2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 8%;
+    text-align: center;
+}
+
+.starttext2 a {
+    z-index: 5;
+    font-family: "HelveticaNeue";
+    font-size: 60px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.start2div{
+    display: none;
+    justify-content: center;
+}
+.plane2img{
+    width: 100%;
+    height: 100%;
+    background: url("../design/lenin.png") no-repeat center;
+    background-size: contain;
+    position: absolute;
+    top:3%;
+    z-index: 0;
+}
+
+.plane2img2{
+    width: 100%;
+    height: 100%;
+    background: url("../design/leninline.png") no-repeat center;
+    background-size: contain;
+    position: absolute;
+    top:5%;
+    z-index: 0;
+}
+
+.plane2but{
+    position: absolute;
+    top: 85%;
+    z-index: 3;
+    width: 45%;
+    height: 6%;
+    border-radius: 32px;
+    background: #000000;
+    font-family: "HelveticaNeue";
+    font-size: 60px;
+    text-align: center;
+    color: #FFFFFF;
+}
+.plane2div{
+}
+.plane2{
+}
+.start3div{
+    display: flex;
+    justify-content: center;
+    display: none;
+}
+.starttext3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    bottom: 8%;
+    text-align: center;
+}
+
+.starttext3 a {
+    z-index: 5;
+    font-family: "HelveticaNeue";
+    font-size: 60px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.bg{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url("../design/bg.png");
+    background-size: cover;
+}
+button:active, button:focus {
+    outline: none !important;
+}
+
+.enddiv{
+    display: none;
+    justify-content: center;
+}
+
+.infoplane{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 20%;
+    background: rgba(88, 85, 85, 0.49);
+    border-radius: 32px;
+    width: 80%;
+    height: 15%;
+}
+
+.nextbut{
+    position: absolute;
+    top: 85%;
+    z-index: 3;
+    width: 80%;
+    height: 10%;
+    border-radius: 32px;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nextbut a {
+    font-family: "HelveticaNeue";
+    font-size: 70px;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.exit{
+    position: absolute;
+    right:0;
+    margin: 35px;
+}
+
+.infoplanetext{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    margin-top: 8%;
+    transform: scale(1.1);
+
+}
+.infoplanetext a{
+    font-family: "HelveticaNeue";
+    font-size: 40px;
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 46px;
+    letter-spacing: -0.02em;
+}
+
+.buydiv{
+    display: none;
+    justify-content: center;
+}
+
+.kepkaplane{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 20%;
+    width: 80%;
+    height: 15%;
+}
+
+.textramka{
+    z-index: 0;
+    position:absolute;
+    right:0%;
+    width: 60%;
+    height: 100%;
+    background: rgba(88, 85, 85, 0.49);
+    border-radius: 32px;
+    display: flex;
+}
+.kepkaplanetext{
+    z-index: 5;
+    position:absolute;
+    right:0%;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: flex-start;
+    right: 7%;
+    top:20%
+}
+.kepkaplanetext a{
+    font-family: "HelveticaNeue";
+    font-size: 50px;
+    text-align: start;
+    color: #FFFFFF;
+    line-height: 56px;
+    letter-spacing: -0.02em;
+}
+.kepkaimg{
+    z-index: 1;
+    background: url("../design/kepka.png") center no-repeat;
+    background-size: contain;
+    position:absolute;
+    left:-7%;
+    bottom:12%;
+    height: 60%;
+    width: 66%;
+    transform: scale(2.4);
+}
+
+.buybut{
+    position: absolute;
+    top: 85%;
+    z-index: 3;
+    width: 80%;
+    height: 10%;
+    border-radius: 32px;
+    background: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.buybut a{
+    font-family: "HelveticaNeue";
+    font-size: 70px;
+    text-align: center;
+    color: #FFFFFF;
+}

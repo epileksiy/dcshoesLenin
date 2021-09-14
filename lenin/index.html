@@ -1,39 +1,121 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta http-equiv="content-language" content="en-EN" />
-    
-    <title>DC shoes Lenin</title>
-    
-    <!-- INCLUDE JEELIZ FACEFILTER SCRIPT -->
-    <script src="../../../dist/jeelizFaceFilter.js"></script>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="content-language" content="en-EN" />
 
-    <script src="../../../dist/html2canvas.js"></script>
-    <script src="../../../dist/axios.min.js"></script>
+  <title>DC shoes Lenin</title>
 
-    <!-- INCLUDE THREE.JS -->
-    <script src="../../../libs/three/v112/three.js"></script>
-    <script src="../../../libs/three/v112/GLTFLoader.js"></script>
-    
-    <!-- INCLUDE JEELIZRESIZER -->
-    <script src="../../../helpers/JeelizResizer.js"></script>
+  <!-- INCLUDE JEELIZ FACEFILTER SCRIPT -->
+  <script src="../../../dist/jeelizFaceFilter.js"></script>
 
-    <!-- INCLUDE JEELIZ THREE.JS HELPER -->
-    <script src="../../../helpers/JeelizThreeHelper.js"></script>
+  <script src="../../../dist/html2canvas.js"></script>
+  <script src="../../../dist/axios.min.js"></script>
 
-    
-    <!-- INCLUDE DEMO SCRIPT -->
-    <script src="./main.js"></script>
+  <!-- INCLUDE THREE.JS -->
+  <script src="../../../libs/three/v112/three.js"></script>
+  <script src="../../../libs/three/v112/GLTFLoader.js"></script>
+
+  <!-- INCLUDE JEELIZRESIZER -->
+  <script src="../../../helpers/JeelizResizer.js"></script>
+
+  <!-- INCLUDE JEELIZ THREE.JS HELPER -->
+  <script src="../../../helpers/JeelizThreeHelper.js"></script>
 
 
+  <!-- INCLUDE DEMO SCRIPT -->
+  <script src="./main.js"></script>
+  <script>
+    let kjop = 0;
+    function clickme(){
+      if(kjop==0){
+        document.getElementById('plane1').style.display = 'none';
+        document.getElementById('plane2').style.display = 'flex';
+        kjop+=1;
+      }
+    }
+    function gorec(){
+      document.getElementById('plane2').style.display = 'none';
+      document.getElementById('plane3').style.display = 'flex';
+      document.getElementById('bg').style.display='none';
+    }
+    function buy(){
+      document.getElementById('enddiv').style.display='none';
+      document.getElementById('buydiv').style.display='flex';
+    }
+  </script>
 
-    <link rel="stylesheet" href="../../appearance/styleFullScreen.css" type="text/css" />
-  </head>
-  
-  <body onload="main()">
-      <canvas width="600" height="600" id='jeeFaceFilterCanvas'></canvas>
-  </body>
+  <link rel="stylesheet" href="../../appearance/styleFullScreen.css" type="text/css" />
+</head>
+
+<body onload="main()">
+<div class="instr" id="instructions" onclick=clickme()>
+  <div class="bg" id="bg">
+  </div>
+  <div class="logo"></div>
+  <div id='plane1' class="starttext1div">
+    <div class="starttext1">
+      <a> ПРЕДОСТАВЬ САЙТУ ДОСТУП</a>
+      <a>К КАМЕРЕ СВОЕГО СМАРТФОНА</a>
+    </div>
+  </div>
+  <div id='plane2' class="start2div">
+    <div class="starttext2div">
+      <div class="starttext2">
+        <a> НАВЕДИ КАМЕРУ НА ЛЕНИНА.</a>
+        <a>СНИМАЙ КАК МОЖНО КРУПНЕЕ,</a>
+        <a> ЧТОБЫ АЛГОРИТМ СМОГ</a>
+        <a>РАСПОЗНАТЬ ЕГО ЛИЦО.</a>
+      </div>
+    </div>
+    <div class="plane2img"></div>
+    <div class="plane2img2"></div>
+    <button class="plane2but" onclick=gorec()> OK</button>
+  </div>
+  <div id='plane3' class="start3div">
+    <div class="plane2img2"></div>
+    <div class="starttext3">
+      <a> ИЩЕМ ЛЕНИНА В КАДРЕ...</a>
+    </div>
+  </div>
+  <div class="enddiv" id="enddiv">
+    <div class="infoplane">
+      <div class="exit">
+        <svg width="40" height="40" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="16.2739" y1="1.42467" x2="1.42464" y2="16.2739" stroke="white" stroke-width="1.61538"/>
+          <line x1="16.2738" y1="16.2739" x2="1.42461" y2="1.42463" stroke="white" stroke-width="1.61538"/>
+        </svg>
+      </div>
+      <div class="infoplanetext">
+        <a>ХОЧЕШЬ ПОДАРОК ОТ DC?</a>
+        <a>СДЕЛАЙ СКРИНШОТ ЛЕНИНА В КЕПКЕ</a>
+        <a>И ПОДЕЛИСЬ ИМ В СОЦСЕТЯХ</a>
+        <a>С ТЭГАМИ #ревдроп #DC</a>
+      </div>
+    </div>
+    <div class="nextbut" onclick=buy()>
+      <a >ДАЛЕЕ</a>
+    </div>
+  </div>
+  <div class="buydiv" id="buydiv">
+    <div class="kepkaplane">
+      <div class="kepkaimg">
+      </div>
+      <div class="textramka">
+      </div>
+      <div class="kepkaplanetext">
+        <a>БЕЙСБОЛКА</a>
+        <a>DC X JMB</a>
+        <a>EVIL THOUGHTS</a>
+      </div>
+    </div>
+    <div class="buybut">
+      <a >КУПИТЬ</a>
+    </div>
+  </div>
+</div>
+<canvas width="600" height="600" id='jeeFaceFilterCanvas'></canvas>
+</body>
 </html>
  
  
