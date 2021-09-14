@@ -11,7 +11,6 @@ need it flipped (mirror effect), while if the rear camera is used we need it not
 to balance between performance and quality
 */ 
 "use strict";
-
 const JeelizResizer = (function(){
   // private vars:
   let _domCanvas = null,

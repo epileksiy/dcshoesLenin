@@ -18,7 +18,6 @@
 
   <!-- INCLUDE JEELIZRESIZER -->
   <script src="../../../helpers/JeelizResizer.js"></script>
-
   <!-- INCLUDE JEELIZ THREE.JS HELPER -->
   <script src="../../../helpers/JeelizThreeHelper.js"></script>
 
@@ -28,13 +27,10 @@
   <script>
     let kjop = 0;
     function clickme(){
-      if(kjop==0){
-        document.getElementById('plane1').style.display = 'none';
-        document.getElementById('plane2').style.display = 'flex';
-        kjop+=1;
-      }
+
     }
     function gorec(){
+      document.getElementById('jeeFaceFilterCanvas').style.display = 'flex';
       document.getElementById('plane2').style.display = 'none';
       document.getElementById('plane3').style.display = 'flex';
       document.getElementById('bg').style.display='none';
@@ -49,7 +45,7 @@
 </head>
 
 <body onload="main()">
-<div class="instr" id="instructions" onclick=clickme()>
+<div class="instr" id="instructions">
   <div class="bg" id="bg">
   </div>
   <div class="logo"></div>

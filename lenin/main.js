@@ -13,8 +13,10 @@ let faceMesh = null;
 let visible = true;
 let gltfObj = null;
 let threeStuffs = null;
+let fff=0;
 
 // build the 3D. called once when Jeeliz Face Filter is OK
+
 function init_threeScene(spec){
   threeStuffs = JeelizThreeHelper.init(spec, null);
 
@@ -88,7 +90,8 @@ function init_threeScene(spec){
     // center the model:
     const centerBBox = bbox.getCenter(new THREE.Vector3());
     gltf.scene.position.add(centerBBox.multiplyScalar(-1));
-    gltf.scene.position.add(new THREE.Vector3(0.2,SETTINGS.offsetYZ[0], SETTINGS.offsetYZ[1]));
+    gltf.scene.rotation.set(0,1.5,0);
+    gltf.scene.position.add(new THREE.Vector3(-0.4,SETTINGS.offsetYZ[0], SETTINGS.offsetYZ[1]));
 
     // scale the model according to its width:
     const sizeX = bbox.getSize(new THREE.Vector3()).x;
@@ -194,6 +197,8 @@ function start(){
 
       console.log('INFO: JEELIZFACEFILTER IS READY');
       init_threeScene(spec);
+      document.getElementById('plane1').style.display = 'none';
+      document.getElementById('plane2').style.display = 'flex';
       // let kepka = threeStuffs.getObjectById('1');
       // console.log(kepka);
     }, //end callbackReady()
@@ -279,8 +284,11 @@ function start(){
                   let conf = response.data[0]['candidates'][0]["confidence"];
                   if(conf>0.5){
                     gltfObj.visible = true;
-                    document.getElementById('plane3').style.display = 'none';
-                    document.getElementById('enddiv').style.display='flex';
+                    if(fff==0){
+                      document.getElementById('plane3').style.display = 'none';
+                      document.getElementById('enddiv').style.display='flex';
+                      fff+=1
+                    }
                   }
                 };
               })
